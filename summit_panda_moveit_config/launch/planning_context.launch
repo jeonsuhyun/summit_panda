@@ -5,8 +5,13 @@
   <!-- The name of the parameter under which the URDF is loaded -->
   <arg name="robot_description" default="robot_description"/>
 
+  <!-- Load universal robot description format (URDF)  -->
+  <!-- <param if="$(arg load_robot_description)" name="$(arg robot_description)" command="xacro  '/home/dyros/catkin_ws/src/summit_xls_franka_std.urdf.xacro'"/> -->
+
+  
   <!-- Load universal robot description format (URDF) -->
-  <param if="$(arg load_robot_description)" name="$(arg robot_description)" command="xacro  '/home/dyros/catkin_ws/src/summit_xls_franka_std.urdf.xacro'"/>
+  <param if="$(arg load_robot_description)" name="$(arg robot_description)" command="$(find summit_panda_moveit_config)/config/summit_xls_franka_std.urdf.xacro"/>
+
 
   <!-- The semantic description that corresponds to the URDF -->
   <param name="$(arg robot_description)_semantic" textfile="$(find summit_panda_moveit_config)/config/summit_xl.srdf" />

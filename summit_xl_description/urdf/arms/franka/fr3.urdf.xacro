@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="fr3">
-
+  <xacro:macro name="franka_pre" params = "prefix">
   <xacro:include filename="$(find summit_xl_description)/urdf/arms/franka/franka_robot.xacro"/>
+  
+  <xacro:arg name="arm_id" default="fr3"/>
 
-  <xacro:arg name="arm_id" default="fr3" />
-
-  <xacro:franka_robot arm_id="$(arg arm_id)"
+  <xacro:franka_robot prefix = "${prefix}" arm_id="${prefix}_fr3"
                       joint_limits="${xacro.load_yaml('$(find summit_xl_description)/urdf/arms/franka/joint_limits.yaml')}">
   </xacro:franka_robot>
-
+  </xacro:macro>
 </robot>

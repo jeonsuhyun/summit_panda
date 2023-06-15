@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: ""
+    relative_path: /home/dyros/catkin_ws/src/summit_xls_franka_std.urdf.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/summit_xl.srdf
+  CONFIG:
+    author_name: suhyun
+    author_email: suhyun0606@snu.ac.kr
+    generated_timestamp: 1683782866

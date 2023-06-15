@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <xacro:macro name="franka_robot" params="arm_id joint_limits">
+  <xacro:macro name="franka_robot" params="prefix arm_id joint_limits">
     <!-- Name of this panda -->
     <!-- Should a franka_gripper be mounted at the flange?" -->
     <xacro:arg name="hand" default="true" />
@@ -19,11 +19,11 @@
     <xacro:if value="$(arg hand)">
       <xacro:include filename="$(find summit_xl_description)/urdf/arms/franka/franka_hand.xacro"/>
       <xacro:franka_hand
-          arm_id="$(arg arm_id)"
+          arm_id="${prefix}_$(arg arm_id)"
           rpy="0 0 ${-pi/4}"
           tcp_xyz="$(arg tcp_xyz)"
           tcp_rpy="$(arg tcp_rpy)"
-          connected_to="$(arg arm_id)_link8"
+          connected_to="${prefix}_$(arg arm_id)_link8"
           safety_distance="0.03"
           gazebo="$(arg gazebo)"
        />
