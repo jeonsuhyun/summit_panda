@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="roas">
+
+  <xacro:property name="PI" value="3.1415926535897931"/>
+
+  <xacro:include filename="$(find summit_xls_franka_sim)/urdf/d435.urdf.xacro"/>
+
+  <link name="top_structure">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://summit_xl_description/meshes/structures/top_structure_roas.STL"/>
+      </geometry>
+      <material name="silver">
+        <color rgba="0.75 0.75 0.75 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://summit_xl_description/meshes/structures/top_structure_roas.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <xacro:include filename="$(find summit_xls_franka_sim)/urdf/arm/fr3.urdf.xacro"/>
+
+  <!-- fr3 -->
+  
+  <joint name="fr3_base_joint" type="fixed">
+    <origin xyz="0.23 0 0.66" rpy="0 0 0"/>
+    <parent link="top_structure"/>
+    <child link="fr3_link0"/>
+  </joint>
+
+  <link name="ee_link"/>
+  <joint name="ee_joint" type="fixed">
+    <parent link="fr3_link8" />
+    <child link="ee_link" />
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- D435 -->
+  <xacro:sensor_d435 parent="camera_bracket" name="camera">
+    <origin xyz="0.0377 0 0.0105" rpy="0 -1.57 3.14"/>
+  </xacro:sensor_d435>
+  
+  <link name="d435_link"/>
+  
+  <joint name="d435_joint" type="fixed">
+    <parent link="camera_link"/>
+    <child link="d435_link"/>
+    <origin xyz="0.0 0.0 0.0" rpy="-${PI/2} 0 -${PI/2}"/>
+  </joint>
+
+  <link name="camera_bracket">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://summit_xl_description/meshes/structures/hand_camera.STL"/>
+      </geometry>
+      <material name="silver">
+        <color rgba="0.75 0.75 0.75 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://summit_xl_description/meshes/structures/hand_camera.STL"/>
+      </geometry>
+      <material name="silver">
+        <color rgba="0.75 0.75 0.75 1"/>
+      </material>
+    </collision>
+  </link>
+
+  <joint name="camera_bracket_joint" type="fixed">
+    <parent link="ee_link" />
+    <child link = "camera_bracket" />
+    <origin xyz="0 0 0.003" rpy="0 0 -0.785" />
+  </joint>
+
+</robot>
