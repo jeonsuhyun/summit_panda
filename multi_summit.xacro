@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot name="multi_robot" xmlns:xacro="http://wiki.ros.org/xacro">
+	
+	<xacro:include filename="$(find summit_xls_franka_sim)/urdf/summit_xls_franka_std_modified.urdf.xacro" />
+
+	<link name="world_frame"/>
+	<joint name="world_joint_1" type="planar">
+	<origin xyz="0 0 0" rpy="0 0 0" />
+      <parent link="world_frame"/>
+      <child link="robot_1_base_footprint" />
+    </joint>
+
+	<joint name="world_joint_2" type="planar">
+    <origin xyz="2 0 0" rpy="0 0 0" />
+	  <parent link="world_frame"/>
+      <child link="robot_2_base_footprint" />
+    </joint>
+
+	<joint name="world_joint_3" type="planar">
+    <origin xyz="-2 0 0" rpy="0 0 0" /> 
+	  <parent link="world_frame"/>
+      <child link="robot_3_base_footprint" />
+    </joint>
+
+
+	<xacro:summit_xls_franka_panda prefix="robot_1" publish_bf="true" hq="${hq}" />
+	<xacro:summit_xls_franka_panda prefix="robot_2" publish_bf="true" hq="${hq}" />
+	<xacro:summit_xls_franka_panda prefix="robot_3" publish_bf="true" hq="${hq}" />
+
+</robot>
